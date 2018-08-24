@@ -41,8 +41,8 @@ public class RaceLogicFragment extends Fragment {
     private static final long FASTEST_INTERVAL = 80;
     private final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
-    long MillisecondTime, StartTime, TimeBuff, UpdateTime = 0L ;
-    double Seconds, Minutes, MilliSeconds ;
+    long millisecondTime, startTime, TimeBuff, UpdateTime = 0L ;
+    double seconds, Minutes, MilliSeconds ;
     boolean isTrueTimer = false;
     Handler handler;
 
@@ -121,16 +121,16 @@ public class RaceLogicFragment extends Fragment {
             }
             timeFinish = System.currentTimeMillis();
             timeDifference = (timeFinish - timeStart);
-            Log.d("EEE", "timeDifference " + timeDifference);
+         //   Log.d("EEE", "timeDifference " + timeDifference);
             timeStart = timeFinish;
 
             Float distance = locationLast.distanceTo(location);
             locationLast = location;
-            Log.d("EEE", "distance " + distance);
+         //   Log.d("EEE", "distance " + distance);
             //  speed meter/millis second
             double speed = distance / timeDifference;
             speed = speed*3600;
-            Log.d("EEE", "speed " + speed + " km/hour");
+         //   Log.d("EEE", "speed " + speed + " km/hour");
 
             return (int)Math.round(speed);
         }
@@ -138,22 +138,26 @@ public class RaceLogicFragment extends Fragment {
     };
 
     private void startTimer(){
+        Log.d("EEE", "startTimer 0");
         isTrueTimer = true;
-        StartTime = SystemClock.uptimeMillis();
+        startTime = SystemClock.uptimeMillis();
         handler = new Handler() ;
-        handler.postDelayed(runnable, 15);
+        handler.postDelayed(runnable, 0);
     }
 
     public Runnable runnable = new Runnable() {
 
         public void run() {
 
-            MillisecondTime = SystemClock.uptimeMillis() - StartTime;
+            millisecondTime = SystemClock.uptimeMillis() - startTime;
 
-            Log.d("EEE", String.valueOf(MillisecondTime));
+            Log.d("EEE", String.valueOf(millisecondTime));
 
-            Seconds =  (double) MillisecondTime /10;
-            Log.d("EEE", String.valueOf(Seconds));
+            seconds =  (double) millisecondTime /10;
+            double time =  Math.round(seconds) / 100d;
+            binding.timeTextView.setText(String.valueOf(time));
+          //  Log.d("EEE", " round  " + String.valueOf(time));
+
          //   Double time =
 
 //            UpdateTime = TimeBuff + MillisecondTime;
@@ -170,7 +174,7 @@ public class RaceLogicFragment extends Fragment {
 //                    + String.format("%02d", Seconds) + ":"
 //                    + String.format("%03d", MilliSeconds));
 //
-            handler.postDelayed(this, 0);
+            handler.postDelayed(this, 15);
         }
 
     };
