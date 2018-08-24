@@ -9,7 +9,9 @@ import android.databinding.DataBindingUtil;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -38,6 +40,11 @@ public class RaceLogicFragment extends Fragment {
     private static final long INTERVAL = 100;
     private static final long FASTEST_INTERVAL = 80;
     private final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+
+    long MillisecondTime, StartTime, TimeBuff, UpdateTime = 0L ;
+    double Seconds, Minutes, MilliSeconds ;
+    boolean isTrueTimer = false;
+    Handler handler;
 
     FragmentRaceLogicBinding binding;
 
@@ -97,23 +104,11 @@ public class RaceLogicFragment extends Fragment {
 
             int speed = getSpeed(locationResult.getLastLocation());
             Log.d("EEE", "speed " + speed + " km/hour");
-            binding.speedometerTextView.setText(speed + " км/час");
-            //  Location location =  locationResult.getLastLocation();
+            binding.speedometerTextView.setText(String.valueOf(speed));
+            if(!isTrueTimer){
+                startTimer();
+            }
 
-
-//            if(location.hasSpeed()){
-//                binding.speedTextViewSpeedometer.setText(String.valueOf(location.getSpeed()));
-//                Log.d("EEE","Lon " + String.valueOf(location.getSpeedAccuracyMetersPerSecond()));
-//                Log.d("EEE","Lon " + String.valueOf(location.getSpeed()));
-//            } else {
-//                Log.d("EEE","Lon ");
-//            }
-//
-//            int i = locationResult.getLocations().size();
-            // Log.d("EEE","Lon " + location.getLongitude() +
-            //          "  Latitude " + location.getLatitude());
-
-            //  binding.speedTextViewSpeedometer.setText(String.valueOf(location.getSpeedAccuracyMetersPerSecond()));
 
         }
         private int getSpeed(Location location){
@@ -137,9 +132,45 @@ public class RaceLogicFragment extends Fragment {
             speed = speed*3600;
             Log.d("EEE", "speed " + speed + " km/hour");
 
-
-
             return (int)Math.round(speed);
+        }
+
+    };
+
+    private void startTimer(){
+        isTrueTimer = true;
+        StartTime = SystemClock.uptimeMillis();
+        handler = new Handler() ;
+        handler.postDelayed(runnable, 15);
+    }
+
+    public Runnable runnable = new Runnable() {
+
+        public void run() {
+
+            MillisecondTime = SystemClock.uptimeMillis() - StartTime;
+
+            Log.d("EEE", String.valueOf(MillisecondTime));
+
+            Seconds =  (double) MillisecondTime /10;
+            Log.d("EEE", String.valueOf(Seconds));
+         //   Double time =
+
+//            UpdateTime = TimeBuff + MillisecondTime;
+//
+//            Seconds = (int) (UpdateTime / 1000);
+//
+//            Minutes = Seconds / 60;
+//
+//            Seconds = Seconds % 60;
+//
+//            MilliSeconds = (int) (UpdateTime % 1000);
+
+//            timer.setText("" + Minutes + ":"
+//                    + String.format("%02d", Seconds) + ":"
+//                    + String.format("%03d", MilliSeconds));
+//
+            handler.postDelayed(this, 0);
         }
 
     };
@@ -210,5 +241,10 @@ public class RaceLogicFragment extends Fragment {
         alert.show();
     }
 
-
+    @Override
+    public void onPause() {
+        handler.removeCallbacks(runnable);
+        fusedLocationClient.removeLocationUpdates(locationCallback);
+        super.onPause();
+    }
 }

@@ -8,7 +8,11 @@
     <string name="action_settings">Settings</string>
     <string name="nav_race_logic">Race Logic</string>
     <string name="nav_statistic">Статистика</string>
-    <string name="zero_km_per_hour">0 км/час</string>
+    <string name="zero">0</string>
     <string name="off">Off</string>
+    <string name="speed">Скорость</string>
+    <string name="time">Время</string>
+    <string name="boost">Разгон</string>
+
 
 </resources>
