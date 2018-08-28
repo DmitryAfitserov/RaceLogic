@@ -16,7 +16,9 @@
     <string name="pref_category_settings_speed">Измерение скорости(с, по)</string>
     <string name="pref_screen_speed_from">Скорость начала отсчета</string>
     <string name="pref_screen_speed_to">Скорость начала отсчета</string>
-    <string name="pref_choose_speed">Выберите скорость начала измерения</string>
+    <string name="pref_choose_speed_from">Выберите скорость начала отсчета</string>
+    <string name="pref_choose_speed_to">Выберите скорость окончания отсчета</string>
+    <string name="checkbox_mutable_speed">Настраиваемые параметры скорости</string>
 
 
     <string-array name="entry_values_speed_from">
