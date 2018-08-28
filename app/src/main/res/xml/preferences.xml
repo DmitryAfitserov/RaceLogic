@@ -7,7 +7,8 @@
 
 
         <ListPreference
-            android:key="button_list_speed_from"
+            android:key="but_list_speed_from"
+            android:summary="%s"
             android:title="@string/pref_choose_speed_from"
             android:entryValues="@array/entry_values_speed_from"
             android:entries="@array/entries_speed_from"
@@ -18,6 +19,7 @@
 
         <ListPreference
             android:key="button_list_speed_to"
+            android:summary="%s"
             android:title="@string/pref_choose_speed_to"
             android:entryValues="@array/entry_values_speed_from"
             android:entries="@array/entries_speed_from"
