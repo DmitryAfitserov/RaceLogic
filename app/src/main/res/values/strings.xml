@@ -19,6 +19,12 @@
     <string name="pref_choose_speed_from">Выберите скорость начала отсчета</string>
     <string name="pref_choose_speed_to">Выберите скорость окончания отсчета</string>
     <string name="checkbox_mutable_speed">Настраиваемые параметры скорости</string>
+    <string name="toast_fail_choosed_speed_to">Изменена верхняя граница на 250 км/час</string>
+    <string name="toast_fail_choosed_speed_from">Изменена начальная граница на 0 км/час</string>
+    <string name="max_speed">250 км/час</string>
+    <string name="min_speed">0 км/час</string>
+    <string name="max_speed_value">250</string>
+    <string name="min_speed_value">0</string>
 
 
     <string-array name="entry_values_speed_from">
@@ -55,4 +61,33 @@
         <item>200 км/ч</item>
     </string-array>
 
+    <string-array name="entry_values_speed_to">
+
+
+        <item>40</item>
+        <item>50</item>
+        <item>60</item>
+        <item>70</item>
+        <item>80</item>
+        <item>90</item>
+        <item>100</item>
+        <item>120</item>
+        <item>150</item>
+        <item>200</item>
+        <item>250</item>
+    </string-array>
+
+    <string-array name="entries_speed_to">
+        <item>40 км/ч</item>
+        <item>50 км/ч</item>
+        <item>60 км/ч</item>
+        <item>70 км/ч</item>
+        <item>80 км/ч</item>
+        <item>90 км/ч</item>
+        <item>100 км/ч</item>
+        <item>120 км/ч</item>
+        <item>150 км/ч</item>
+        <item>200 км/ч</item>
+        <item>250 км/ч</item>
+    </string-array>
 </resources>
