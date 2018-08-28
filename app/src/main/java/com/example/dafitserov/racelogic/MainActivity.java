@@ -1,11 +1,9 @@
 package com.example.dafitserov.racelogic;
 
+import android.app.Fragment;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
+
 import android.support.v4.app.FragmentManager;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -64,8 +62,10 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+
         if (id == R.id.action_settings) {
+            SettingsFragment settingsFragment = new SettingsFragment();
+            getFragmentManager().beginTransaction().replace(R.id.container ,settingsFragment).commit();
             return true;
         }
 
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void replace(Fragment fragment){
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        android.app.FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.container , fragment).commit();
     }
 

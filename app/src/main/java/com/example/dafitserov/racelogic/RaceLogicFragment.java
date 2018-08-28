@@ -2,6 +2,7 @@ package com.example.dafitserov.racelogic;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -15,7 +16,7 @@ import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
+
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -174,7 +175,7 @@ public class RaceLogicFragment extends Fragment {
 //                    + String.format("%02d", Seconds) + ":"
 //                    + String.format("%03d", MilliSeconds));
 //
-            handler.postDelayed(this, 15);
+            handler.postDelayed(this, 20);
         }
 
     };
@@ -247,8 +248,12 @@ public class RaceLogicFragment extends Fragment {
 
     @Override
     public void onPause() {
-        handler.removeCallbacks(runnable);
-        fusedLocationClient.removeLocationUpdates(locationCallback);
+        if(handler!= null){
+            handler.removeCallbacks(runnable);
+        }
+        if(fusedLocationClient != null){
+            fusedLocationClient.removeLocationUpdates(locationCallback);
+        }
         super.onPause();
     }
 }

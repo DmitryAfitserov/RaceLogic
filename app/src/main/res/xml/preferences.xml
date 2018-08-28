@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen  xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- opens a subscreen of settings -->
+    <PreferenceCategory
+        android:title="@string/pref_category_settings_speed"
+        android:key="pref_key_settings_speed">
+
+        <ListPreference
+            android:key="button_list_speed_from"
+            android:title="@string/pref_choose_speed"
+            android:entryValues="@array/entry_values_speed_from"
+            android:entries="@array/entries_speed_from"
+            android:defaultValue="0"
+            >
+
+        </ListPreference>
+
+
+
+
+
+
+    <PreferenceScreen
+        android:key="button_speed_with_key"
+        android:title="@string/pref_screen_speed_from"
+        android:persistent="false">
+
+    </PreferenceScreen>
+    </PreferenceCategory>
+
+
+
+</PreferenceScreen>

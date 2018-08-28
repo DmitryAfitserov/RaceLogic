@@ -13,6 +13,44 @@
     <string name="speed">Скорость</string>
     <string name="time">Время</string>
     <string name="boost">Разгон</string>
+    <string name="pref_category_settings_speed">Измерение скорости(с, по)</string>
+    <string name="pref_screen_speed_from">Скорость начала отсчета</string>
+    <string name="pref_screen_speed_to">Скорость начала отсчета</string>
+    <string name="pref_choose_speed">Выберите скорость начала измерения</string>
 
+
+    <string-array name="entry_values_speed_from">
+        <item>0</item>
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+        <item>50</item>
+        <item>60</item>
+        <item>70</item>
+        <item>80</item>
+        <item>90</item>
+        <item>100</item>
+        <item>120</item>
+        <item>150</item>
+        <item>200</item>
+    </string-array>
+
+    <string-array name="entries_speed_from">
+        <item>0 км/ч</item>
+        <item>10 км/ч</item>
+        <item>20 км/ч</item>
+        <item>30 км/ч</item>
+        <item>40 км/ч</item>
+        <item>50 км/ч</item>
+        <item>60 км/ч</item>
+        <item>70 км/ч</item>
+        <item>80 км/ч</item>
+        <item>90 км/ч</item>
+        <item>100 км/ч</item>
+        <item>120 км/ч</item>
+        <item>150 км/ч</item>
+        <item>200 км/ч</item>
+    </string-array>
 
 </resources>
