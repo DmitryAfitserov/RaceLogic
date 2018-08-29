@@ -16,6 +16,8 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    boolean isMenuSettings = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,9 +45,16 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
+        } else  if(isMenuSettings) {
+            isMenuSettings = false;
+            startFirstFragment();
+        }
+            else {
             super.onBackPressed();
         }
+
+
+
     }
 
     @Override
@@ -64,6 +73,7 @@ public class MainActivity extends AppCompatActivity
 
 
         if (id == R.id.action_settings) {
+            isMenuSettings = true;
             SettingsFragment settingsFragment = new SettingsFragment();
             getFragmentManager().beginTransaction().replace(R.id.container ,settingsFragment).commit();
             return true;

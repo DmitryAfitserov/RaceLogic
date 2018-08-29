@@ -4,13 +4,9 @@ import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
-import android.preference.PreferenceScreen;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+
 import android.widget.Toast;
 
 
@@ -40,8 +36,6 @@ public class SettingsFragment extends PreferenceFragment {
         speedFrom = Integer.parseInt(a);
         speedTo = Integer.parseInt(b);
 
-
-
         listPreferenceSpeedFrom.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object o) {
@@ -54,19 +48,19 @@ public class SettingsFragment extends PreferenceFragment {
            //       Log.d("EEE", "choosedSpeed   " +  entries[index] + "   " + textValue);
 
                  //   Log.d("EEE", "selectedSpeed   " + selectedSpeed + "  speedTo  " +   speedTo);
-                    if(selectedSpeed >= speedTo){
+                if(selectedSpeed >= speedTo){
+
                  //       Log.d("EEE", "if(choosedSpeed >= speedTo)   ");
-                        Toast.makeText(getActivity(),  R.string.toast_fail_selected_speed_to,
+                Toast.makeText(getActivity(),  R.string.toast_fail_selected_speed_to,
                                 Toast.LENGTH_LONG).show();
 
-                        String value = getResources().getString(R.string.max_speed_value);
-                        listPreferenceSpeedTo.setValue(value);
+                    String value = getResources().getString(R.string.max_speed_value);
+                    listPreferenceSpeedTo.setValue(value);
 
-                        String summary = getResources().getString(R.string.max_speed);
-                        listPreferenceSpeedTo.setSummary(summary);
-
-                        speedTo = Integer.parseInt(String.valueOf(value));
-                    }
+                    String summary = getResources().getString(R.string.max_speed);
+                    listPreferenceSpeedTo.setSummary(summary);
+                    speedTo = Integer.parseInt(String.valueOf(value));
+                }
                     speedFrom = selectedSpeed;
                     listPreferenceSpeedFrom.setSummary(entries[index]);
                 return true;
@@ -108,14 +102,30 @@ public class SettingsFragment extends PreferenceFragment {
             }
 
         });
+        Preference preference =
+                (Preference)getPreferenceManager().findPreference("but_reset_speed");
+        preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+
+                String value = getResources().getString(R.string.min_speed_value);
+                listPreferenceSpeedFrom.setValue(value);
+                String summary = getResources().getString(R.string.min_speed);
+                listPreferenceSpeedFrom.setSummary(summary);
+                speedFrom = Integer.parseInt(String.valueOf(value));
+
+                value = getResources().getString(R.string.default_speed_value);
+                listPreferenceSpeedTo.setValue(value);
+
+                summary = getResources().getString(R.string.default_speed);
+                listPreferenceSpeedTo.setSummary(summary);
+                speedTo = Integer.parseInt(String.valueOf(value));
 
 
-
+                return true;
+            }
+        });
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
 
-    }
 }

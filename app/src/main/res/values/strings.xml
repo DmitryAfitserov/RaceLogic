@@ -23,8 +23,11 @@
     <string name="toast_fail_selected_speed_from">Изменена начальная граница на 0 км/час</string>
     <string name="max_speed">250 км/час</string>
     <string name="min_speed">0 км/час</string>
+    <string name="default_speed">100 км/час</string>
     <string name="max_speed_value">250</string>
     <string name="min_speed_value">0</string>
+    <string name="default_speed_value">100</string>
+    <string name="reset_speed">Сброс скорости по умолчанию(0-100)</string>
 
 
     <string-array name="entry_values_speed_from">

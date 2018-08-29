@@ -29,6 +29,13 @@
 
         </ListPreference>
 
+        <Preference
+            android:key="but_reset_speed"
+            android:title="@string/reset_speed"
+
+            />
+
+
 
     </PreferenceCategory>
 
