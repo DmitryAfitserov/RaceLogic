@@ -19,8 +19,8 @@
     <string name="pref_choose_speed_from">Выберите скорость начала отсчета</string>
     <string name="pref_choose_speed_to">Выберите скорость окончания отсчета</string>
     <string name="checkbox_mutable_speed">Настраиваемые параметры скорости</string>
-    <string name="toast_fail_choosed_speed_to">Изменена верхняя граница на 250 км/час</string>
-    <string name="toast_fail_choosed_speed_from">Изменена начальная граница на 0 км/час</string>
+    <string name="toast_fail_selected_speed_to">Изменена верхняя граница на 250 км/час</string>
+    <string name="toast_fail_selected_speed_from">Изменена начальная граница на 0 км/час</string>
     <string name="max_speed">250 км/час</string>
     <string name="min_speed">0 км/час</string>
     <string name="max_speed_value">250</string>
@@ -45,20 +45,20 @@
     </string-array>
 
     <string-array name="entries_speed_from">
-        <item>0 км/ч</item>
-        <item>10 км/ч</item>
-        <item>20 км/ч</item>
-        <item>30 км/ч</item>
-        <item>40 км/ч</item>
-        <item>50 км/ч</item>
-        <item>60 км/ч</item>
-        <item>70 км/ч</item>
-        <item>80 км/ч</item>
-        <item>90 км/ч</item>
-        <item>100 км/ч</item>
-        <item>120 км/ч</item>
-        <item>150 км/ч</item>
-        <item>200 км/ч</item>
+        <item>0 км/час</item>
+        <item>10 км/час</item>
+        <item>20 км/час</item>
+        <item>30 км/час</item>
+        <item>40 км/час</item>
+        <item>50 км/час</item>
+        <item>60 км/час</item>
+        <item>70 км/час</item>
+        <item>80 км/час</item>
+        <item>90 км/час</item>
+        <item>100 км/час</item>
+        <item>120 км/час</item>
+        <item>150 км/час</item>
+        <item>200 км/час</item>
     </string-array>
 
     <string-array name="entry_values_speed_to">
@@ -78,16 +78,16 @@
     </string-array>
 
     <string-array name="entries_speed_to">
-        <item>40 км/ч</item>
-        <item>50 км/ч</item>
-        <item>60 км/ч</item>
-        <item>70 км/ч</item>
-        <item>80 км/ч</item>
-        <item>90 км/ч</item>
-        <item>100 км/ч</item>
-        <item>120 км/ч</item>
-        <item>150 км/ч</item>
-        <item>200 км/ч</item>
-        <item>250 км/ч</item>
+        <item>40 км/час</item>
+        <item>50 км/час</item>
+        <item>60 км/час</item>
+        <item>70 км/час</item>
+        <item>80 км/час</item>
+        <item>90 км/час</item>
+        <item>100 км/час</item>
+        <item>120 км/час</item>
+        <item>150 км/час</item>
+        <item>200 км/час</item>
+        <item>250 км/час</item>
     </string-array>
 </resources>

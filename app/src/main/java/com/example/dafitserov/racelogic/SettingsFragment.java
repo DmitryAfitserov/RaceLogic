@@ -33,7 +33,7 @@ public class SettingsFragment extends PreferenceFragment {
         final ListPreference listPreferenceSpeedTo =
                 (ListPreference)getPreferenceManager().findPreference("but_list_speed_to");
 
-        Log.d("EEE", "cvc   " + listPreferenceSpeedFrom.getValue() + "  df  " +   listPreferenceSpeedTo.getValue());
+      //  Log.d("EEE", "cvc   " + listPreferenceSpeedFrom.getValue() + "  df  " +   listPreferenceSpeedTo.getValue());
         String a = listPreferenceSpeedFrom.getValue();
         String b = listPreferenceSpeedTo.getValue();
 
@@ -45,14 +45,30 @@ public class SettingsFragment extends PreferenceFragment {
         listPreferenceSpeedFrom.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object o) {
-                int choosedSpeed = Integer.parseInt(listPreferenceSpeedFrom.getValue());
-                    if(choosedSpeed >= speedTo){
-                        Toast.makeText(getActivity(),  R.string.toast_fail_choosed_speed_to, Toast.LENGTH_LONG);
-                        listPreferenceSpeedTo.setValue(String.valueOf(R.string.max_speed_value));
-                        listPreferenceSpeedTo.setSummary(R.string.max_speed);
-                        speedTo = Integer.parseInt(String.valueOf(R.string.max_speed_value));
-                        speedFrom = choosedSpeed;
+
+                int selectedSpeed = Integer.parseInt(o.toString());
+                int index = listPreferenceSpeedFrom.findIndexOfValue(o.toString());
+
+                CharSequence[] entries = listPreferenceSpeedFrom.getEntries();
+
+           //       Log.d("EEE", "choosedSpeed   " +  entries[index] + "   " + textValue);
+
+                 //   Log.d("EEE", "selectedSpeed   " + selectedSpeed + "  speedTo  " +   speedTo);
+                    if(selectedSpeed >= speedTo){
+                 //       Log.d("EEE", "if(choosedSpeed >= speedTo)   ");
+                        Toast.makeText(getActivity(),  R.string.toast_fail_selected_speed_to,
+                                Toast.LENGTH_LONG).show();
+
+                        String value = getResources().getString(R.string.max_speed_value);
+                        listPreferenceSpeedTo.setValue(value);
+
+                        String summary = getResources().getString(R.string.max_speed);
+                        listPreferenceSpeedTo.setSummary(summary);
+
+                        speedTo = Integer.parseInt(String.valueOf(value));
                     }
+                    speedFrom = selectedSpeed;
+                    listPreferenceSpeedFrom.setSummary(entries[index]);
                 return true;
             }
         });
@@ -61,15 +77,45 @@ public class SettingsFragment extends PreferenceFragment {
             @Override
             public boolean onPreferenceChange(Preference preference, Object o) {
 
+                int selectedSpeed = Integer.parseInt(o.toString());
+
+                int index = listPreferenceSpeedTo.findIndexOfValue(o.toString());
+
+                CharSequence[] entries = listPreferenceSpeedTo.getEntries();
+
+                //     Log.d("EEE", "choosedSpeed   " +  entries[index] + "   " + textValue);
+
+                //  Log.d("EEE", "selectedSpeed   " + selectedSpeed + "  speedTo  " +   speedTo);
+                if (selectedSpeed <= speedFrom) {
+                 //   Log.d("EEE", "if(electedSpeed <= speedFrom)   ");
+
+                    Toast.makeText(getActivity(), R.string.toast_fail_selected_speed_from,
+                            Toast.LENGTH_LONG).show();
+
+                    String value = getResources().getString(R.string.min_speed_value);
+                    listPreferenceSpeedFrom.setValue(value);
+
+                    String summary = getResources().getString(R.string.min_speed);
+                    listPreferenceSpeedFrom.setSummary(summary);
+
+                    speedFrom = Integer.parseInt(String.valueOf(value));
+
+                }
+                    speedTo = selectedSpeed;
+                    listPreferenceSpeedTo.setSummary(entries[index]);
                 return true;
+
             }
+
         });
 
 
-    }
-
-    private void setIntSpeed(){
 
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+
+    }
 }
