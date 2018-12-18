@@ -152,29 +152,28 @@ public class RaceLogicFragment extends Fragment {
 
             millisecondTime = SystemClock.uptimeMillis() - startTime;
 
-            Log.d("EEE", String.valueOf(millisecondTime));
+          //
 
-            seconds =  (double) millisecondTime /10;
-            double time =  Math.round(seconds) / 100d;
-            binding.timeTextView.setText(String.valueOf(time));
-          //  Log.d("EEE", " round  " + String.valueOf(time));
+            int hundredthsSeconds =  Math.round(millisecondTime /10);
 
-         //   Double time =
+            Log.d("EEE", String.valueOf(hundredthsSeconds));
 
-//            UpdateTime = TimeBuff + MillisecondTime;
-//
-//            Seconds = (int) (UpdateTime / 1000);
-//
-//            Minutes = Seconds / 60;
-//
-//            Seconds = Seconds % 60;
-//
-//            MilliSeconds = (int) (UpdateTime % 1000);
+            String hundredthsSecondString  = String.valueOf(hundredthsSeconds);
+            String twoPatrSecondsString = hundredthsSecondString.substring(
+                    hundredthsSecondString.length() - 2, hundredthsSecondString.length());
+            String onePartSecondsString = hundredthsSecondString.substring(
+                    0, hundredthsSecondString.length() - 2);
+            if(onePartSecondsString.length() == 0){
+                onePartSecondsString = "0";
+            }
+            if(twoPatrSecondsString.length() == 1){
+                twoPatrSecondsString = twoPatrSecondsString + "0";
+            }
 
-//            timer.setText("" + Minutes + ":"
-//                    + String.format("%02d", Seconds) + ":"
-//                    + String.format("%03d", MilliSeconds));
-//
+
+            binding.timeTextView.setText(onePartSecondsString + '.' + twoPatrSecondsString);
+
+
             handler.postDelayed(this, 20);
         }
 
