@@ -1,6 +1,8 @@
 package com.example.dafitserov.racelogic;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
@@ -9,12 +11,14 @@ import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 
 import android.support.v4.content.ContextCompat;
@@ -42,7 +46,7 @@ public class RaceLogicFragment extends Fragment {
     private static final long FASTEST_INTERVAL = 80;
     private final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
-    long millisecondTime, startTime, TimeBuff, UpdateTime = 0L ;
+    long millisecondTime, startTime = 0L ;
     double seconds, Minutes, MilliSeconds ;
     boolean isTrueTimer = false;
     Handler handler;
@@ -60,6 +64,7 @@ public class RaceLogicFragment extends Fragment {
 
         checkGps();
         onLocationRequest();
+
 
 
         return view;
@@ -109,9 +114,8 @@ public class RaceLogicFragment extends Fragment {
             if(!isTrueTimer){
                 startTimer();
             }
-
-
         }
+
         private int getSpeed(Location location){
 
             if(timeStart == null || locationLast == null){
@@ -148,6 +152,7 @@ public class RaceLogicFragment extends Fragment {
 
     public Runnable runnable = new Runnable() {
 
+        @SuppressLint("SetTextI18n")
         public void run() {
 
             millisecondTime = SystemClock.uptimeMillis() - startTime;
@@ -156,13 +161,24 @@ public class RaceLogicFragment extends Fragment {
 
             int hundredthsSeconds =  Math.round(millisecondTime /10);
 
-            Log.d("EEE", String.valueOf(hundredthsSeconds));
+         //   Log.d("EEE", String.valueOf(hundredthsSeconds));
 
             String hundredthsSecondString  = String.valueOf(hundredthsSeconds);
-            String twoPatrSecondsString = hundredthsSecondString.substring(
-                    hundredthsSecondString.length() - 2, hundredthsSecondString.length());
-            String onePartSecondsString = hundredthsSecondString.substring(
-                    0, hundredthsSecondString.length() - 2);
+            String twoPatrSecondsString;
+            String onePartSecondsString;
+            if(hundredthsSecondString.length() < 2){
+                twoPatrSecondsString = hundredthsSecondString.substring(
+                        hundredthsSecondString.length() - 1, hundredthsSecondString.length());
+                twoPatrSecondsString = "0" + twoPatrSecondsString;
+                onePartSecondsString = "0";
+            } else {
+                twoPatrSecondsString = hundredthsSecondString.substring(
+                        hundredthsSecondString.length() - 2, hundredthsSecondString.length());
+                onePartSecondsString = hundredthsSecondString.substring(
+                        0, hundredthsSecondString.length() - 2);
+            }
+
+
             if(onePartSecondsString.length() == 0){
                 onePartSecondsString = "0";
             }
@@ -223,6 +239,7 @@ public class RaceLogicFragment extends Fragment {
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.M)
     private void showGPSDisabledAlertToUser() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
         alertDialogBuilder.setMessage("Enable GPS to use application")
@@ -244,6 +261,7 @@ public class RaceLogicFragment extends Fragment {
         AlertDialog alert = alertDialogBuilder.create();
         alert.show();
     }
+
 
     @Override
     public void onPause() {
