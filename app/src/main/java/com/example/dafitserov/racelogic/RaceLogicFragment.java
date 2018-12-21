@@ -51,6 +51,7 @@ public class RaceLogicFragment extends Fragment {
     boolean isTrueTimer = false;
     Handler handler;
 
+
     FragmentRaceLogicBinding binding;
 
     @Nullable
@@ -152,42 +153,52 @@ public class RaceLogicFragment extends Fragment {
 
     public Runnable runnable = new Runnable() {
 
+        StringBuilder hundredthsSecondString = new StringBuilder();
+        StringBuilder twoPatrSecondsString = new StringBuilder();
+        StringBuilder onePartSecondsString = new StringBuilder();
+
         @SuppressLint("SetTextI18n")
         public void run() {
 
             millisecondTime = SystemClock.uptimeMillis() - startTime;
-
-          //
+            
 
             int hundredthsSeconds =  Math.round(millisecondTime /10);
 
-         //   Log.d("EEE", String.valueOf(hundredthsSeconds));
+            hundredthsSecondString.delete(0, hundredthsSecondString.length());
+            twoPatrSecondsString.delete(0, twoPatrSecondsString.length());
+            onePartSecondsString.delete(0, onePartSecondsString.length());
+            hundredthsSecondString.append(String.valueOf(hundredthsSeconds));
 
-            String hundredthsSecondString  = String.valueOf(hundredthsSeconds);
-            String twoPatrSecondsString;
-            String onePartSecondsString;
+            Log.d("EEE", "valueOf   " + hundredthsSecondString.toString());
+
+
             if(hundredthsSecondString.length() < 2){
-                twoPatrSecondsString = hundredthsSecondString.substring(
-                        hundredthsSecondString.length() - 1, hundredthsSecondString.length());
-                twoPatrSecondsString = "0" + twoPatrSecondsString;
-                onePartSecondsString = "0";
+
+                twoPatrSecondsString.append(hundredthsSecondString.substring(hundredthsSecondString.length() - 1,
+                        hundredthsSecondString.length()));
+
+                twoPatrSecondsString.append("0", 0, 1);
+                Log.d("EEE", "if one  " + twoPatrSecondsString.toString());
             } else {
-                twoPatrSecondsString = hundredthsSecondString.substring(
-                        hundredthsSecondString.length() - 2, hundredthsSecondString.length());
-                onePartSecondsString = hundredthsSecondString.substring(
-                        0, hundredthsSecondString.length() - 2);
+                twoPatrSecondsString.append(hundredthsSecondString.substring(
+                        hundredthsSecondString.length() - 2, hundredthsSecondString.length()));
+                onePartSecondsString.append(hundredthsSecondString.substring(
+                        0, hundredthsSecondString.length() - 2));
+                Log.d("EEE", "if two  " + twoPatrSecondsString.toString());
             }
 
 
             if(onePartSecondsString.length() == 0){
-                onePartSecondsString = "0";
+                onePartSecondsString.append("0");
             }
             if(twoPatrSecondsString.length() == 1){
-                twoPatrSecondsString = twoPatrSecondsString + "0";
+                twoPatrSecondsString.append("0");
             }
 
 
-            binding.timeTextView.setText(onePartSecondsString + '.' + twoPatrSecondsString);
+            binding.timeTextView.setText(onePartSecondsString.toString() + '.'
+                    + twoPatrSecondsString.toString());
 
 
             handler.postDelayed(this, 20);
